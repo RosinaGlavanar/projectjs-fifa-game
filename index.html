@@ -28,37 +28,72 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="container">
-      <br />
-      <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8">
-          <form class="card card-sm">
-            <div class="card-body row no-gutters align-items-center">
-              <div class="col-auto">
-                <i class="fas fa-search h4 text-body"></i>
-              </div>
-              <div class="col">
-                <input
-                  id="search"
-                  class="form-control form-control-lg form-control-borderless"
-                  type="search"
-                  placeholder="Search topics or keywords"
-                />
-              </div>
-              <div class="col-auto">
-                <button
-                  onclick="searchByCountry()"
-                  class="btn btn-lg btn-success"
-                  type="submit"
-                >
-                  Search
-                </button>
-              </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <button
+              onclick="showGroup()"
+              type="button"
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#exampleModal"
+            >
+              Show groups
+            </button>
+          </li>
+          <li>
+            <div class="dropdown">
+              <button
+                class="btn btn-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Dropdown button
+              </button>
+              <div
+                id="dropdownCode"
+                class="dropdown-menu"
+                aria-labelledby="dropdownMenuButton"
+              ></div>
             </div>
-          </form>
-        </div>
+          </li>
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0">
+          <input
+            id="search"
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button
+            onclick="searchByCountry()"
+            class="btn btn-outline-success my-2 my-sm-0"
+            type="submit"
+          >
+            Search
+          </button>
+        </form>
       </div>
-    </div>
+    </nav>
 
     <table class="table">
       <thead>
@@ -69,6 +104,53 @@
       </thead>
       <tbody id="tbodySearch"></tbody>
     </table>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Groups</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="modalGroups" class="modal-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Group</th>
+                  <th scope="col">Countries</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyGroups"></tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="main.js"></script>
     <script src="Ajax.js"></script>
   </body>
