@@ -1,5 +1,12 @@
 getCode();
 
+var listOfActions = [];
+
+function generateActions(actionsText) {
+  var time = new Date().toLocaleString();
+  committedActions.push(time + " - " + actionsText);
+}
+
 function searchByCountry() {
   var searchText = document.getElementById("search").value;
   clear("#tbodySearch");
