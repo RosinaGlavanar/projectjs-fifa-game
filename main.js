@@ -1,16 +1,41 @@
 getCode();
 
 var listOfActions = [];
-
+if (localStorage.getItem("listOfActions") != null) {
+  listOfActions = JSON.parse(localStorage.getItem("listOfActions"));
+}
+htmlForActions();
 function generateActions(actionsText) {
-  var time = new Date().toLocaleString();
-  committedActions.push(time + " - " + actionsText);
+  var time = new Date().toLocaleString(undefined, {
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit"
+  });
+  listOfActions.push(time + " - " + actionsText);
+  localStorage.setItem("listOfActions", JSON.stringify(listOfActions));
+  htmlForActions();
+  console.log(listOfActions);
+}
+
+function htmlForActions() {
+  clear("#actionsUl");
+  var ul = document.getElementById("actionsUl");
+  for (let index = 0; index < listOfActions.length; index++) {
+    var li = document.createElement("li");
+    li.className = "list-group-item";
+    li.innerHTML = listOfActions[index];
+    ul.appendChild(li);
+  }
 }
 
 function searchByCountry() {
   var searchText = document.getElementById("search").value;
   clear("#tbodySearch");
   getEvents(searchText);
+  generateActions("Search by " + searchText);
 }
 
 function showGroup() {
@@ -21,6 +46,7 @@ function showGroup() {
 function showEventByCode(code) {
   clear("#tbodySearch");
   getCountry(code);
+  generateActions("Search by " + code);
 }
 
 function clear(selector) {
@@ -87,6 +113,7 @@ function getGroup() {
       tr.appendChild(th2);
       document.getElementById("tbodyGroups").appendChild(tr);
     }
+    generateActions("Show group");
   });
 }
 
